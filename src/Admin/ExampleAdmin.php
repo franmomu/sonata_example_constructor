@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\DataMapper\ExampleDataMapper;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -37,6 +38,11 @@ final class ExampleAdmin extends AbstractAdmin
             ]);
     }
 
+    public function getNewInstance()
+    {
+        return null;
+    }
+
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
@@ -44,6 +50,10 @@ final class ExampleAdmin extends AbstractAdmin
             ->add('name')
             ->add('score')
             ;
+
+        $builder = $formMapper->getFormBuilder();
+        $builder->setDataMapper(new ExampleDataMapper());
+        $builder->setEmptyData(null);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void

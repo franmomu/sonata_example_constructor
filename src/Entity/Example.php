@@ -46,4 +46,9 @@ class Example
     {
         return $this->score;
     }
+
+    public function update(float $score)
+    {
+        $this->score = $score;
+    }
 }
